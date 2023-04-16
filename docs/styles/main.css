@@ -47,7 +47,7 @@ body {
 
 .menu__item {
   background-color: var(--main-items-color);
-  box-shadow: 0px 8px 14px rgba(62, 107, 224, 0.12);
+  box-shadow: 0px 10px 15px rgba(62, 107, 224, 0.12);
   border-radius: 14px;
   border: none;
   height: 45px;
