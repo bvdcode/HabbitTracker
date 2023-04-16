@@ -1,6 +1,9 @@
 :root {
+  --main-items-color: #5e4552;
   --main-bg-color: rgb(53, 53, 53);
   --main-font-color: rgb(171, 212, 189);
+  --additional-bg-color: rgb(62, 62, 62);
+  --hover-color: #6a6afb;
 }
 
 * {
@@ -12,4 +15,71 @@ body {
   margin: 0;
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
+}
+
+.app {
+  display: flex;
+}
+
+.panel {
+  background-color: var(--additional-bg-color);
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.logo {
+  margin-bottom: 50px;
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.menu__item {
+  background-color: var(--main-items-color);
+  box-shadow: 0px 8px 14px rgba(62, 107, 224, 0.12);
+  border-radius: 14px;
+  border: none;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
+
+.menu__add {
+  background: none;
+  border: 1px solid var(--main-items-color);
+  border-radius: 14px;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
+
+.menu__item:hover {
+  background: var(--hover-color);
+}
+
+.menu__item:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.menu__item_active {
+  background: var(--hover-color);
+}
+
+.menu__item_active img {
+  filter: brightness(0) invert(1);
+}
+
+.menu__add:hover {
+  background: var(--hover-color);
 }
