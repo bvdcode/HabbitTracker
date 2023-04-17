@@ -1,9 +1,11 @@
 :root {
   --main-items-color: #5e4552;
   --main-bg-color: rgb(53, 53, 53);
-  --main-font-color: rgb(171, 212, 189);
+  --main-font-color: rgb(229, 174, 255);
+  --additional-font-color: rgb(209, 169, 212);
   --additional-bg-color: rgb(62, 62, 62);
   --hover-color: #6a6afb;
+  --shadow-color: rgba(62, 107, 224, 0.12);
 }
 
 * {
@@ -14,28 +16,21 @@ body {
   font-family: "Comfortaa", cursive;
   margin: 0;
   background-color: var(--main-bg-color);
-  color: var(--main-font-color);
+  font-weight: 400;
 }
 
 .app {
   display: flex;
 }
 
-.panel {
-  background-color: var(--additional-bg-color);
-  min-height: 100vh;
-  padding: 30px;
-}
-
 .logo {
   margin-bottom: 50px;
 }
 
-.menu__list {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  align-items: center;
+.panel {
+  background-color: var(--additional-bg-color);
+  min-height: 100vh;
+  padding: 30px;
 }
 
 .menu {
@@ -45,20 +40,18 @@ body {
   align-items: center;
 }
 
-.menu__item {
-  background-color: var(--main-items-color);
-  box-shadow: 0px 10px 15px rgba(62, 107, 224, 0.12);
-  border-radius: 14px;
-  border: none;
-  height: 45px;
-  width: 45px;
-  cursor: pointer;
+.menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
 }
 
-.menu__add {
-  background: none;
-  border: 1px solid var(--main-items-color);
+.menu__item {
+  background-color: var(--main-items-color);
+  box-shadow: 0px 10px 15px var(--shadow-color);
   border-radius: 14px;
+  border: none;
   height: 45px;
   width: 45px;
   cursor: pointer;
@@ -80,6 +73,165 @@ body {
   filter: brightness(0) invert(1);
 }
 
+.menu__add {
+  background: none;
+  border: 1px solid var(--main-items-color);
+  border-radius: 14px;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
+
 .menu__add:hover {
   background: var(--hover-color);
+}
+
+.content {
+  min-width: 900px;
+  padding: 45px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 33px;
+  color: var(--additional-font-color);
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 235px;
+}
+
+.progress__text {
+  display: flex;
+  justify-content: space-between;
+  color: var(--additional-font-color);
+}
+
+.progress__name {
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--additional-font-color);
+}
+
+.progress__bar {
+  width: 100%;
+  background: var(--additional-bg-color);
+  border-radius: 4px;
+  height: 5px;
+  position: relative;
+}
+
+.progress__cover-bar {
+  position: absolute;
+  width: 50%;
+  height: 5px;
+  border-radius: 4px;
+  background: var(--hover-color);
+}
+
+main {
+  margin-top: 30px;
+}
+
+.habbit {
+  background: var(--additional-bg-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.habbit__day {
+  color: var(--additional-font-color);
+  background: var(--hover-color);
+  border-radius: 10px 0 0 10px;
+  border-right: 3px solid var(--main-items-color);
+  font-size: 14px;
+  line-height: 16px;
+  padding: 20px 40px;
+  min-width: 130px;
+}
+
+.habbit__comment {
+  font-size: 16px;
+  line-height: 18px;
+  padding: 20px 25px;
+  color: var(--main-font-color);
+}
+
+.habbit__delete {
+  margin-left: auto;
+  margin-right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 2px;
+  box-shadow: 0px 10px 15px var(--shadow-color);
+}
+
+.habbit__delete:hover {
+  background: var(--hover-color);
+}
+
+.habbit__form {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  padding: 0px 10px 0px 25px;
+  position: relative;
+}
+
+input {
+  background: var(--main-bg-color);
+  border: none;
+  border-radius: 9px;
+  padding: 12px 20px;
+  color: var(--main-font-color);
+  flex: 1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+input:focus {
+  outline: 1px solid var(--hover-color);
+}
+
+.input_icon {
+  padding-left: 45px;
+}
+
+.input__icon {
+  position: absolute;
+  top: 10px;
+  left: 45px;
+}
+
+.form__button {
+  background: var(--hover-color);
+  border-radius: 9px;
+  border: none;
+  font-size: 13px;
+  line-height: 14px;
+  color: var(--additional-font-color);
+  padding: 14px 30px;
+  cursor: pointer;
+}
+
+.form__button:hover {
+  color: var(--main-font-color);
 }
