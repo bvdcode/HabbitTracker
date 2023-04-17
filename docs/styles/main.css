@@ -87,8 +87,9 @@ body {
 }
 
 .content {
-  min-width: 900px;
-  padding: 45px;
+  min-width: 400px;
+  width: 100%;
+  padding: 45px;  
 }
 
 header {
@@ -132,7 +133,7 @@ h1 {
 
 .progress__cover-bar {
   position: absolute;
-  width: 50%;
+  width: 1%;
   height: 5px;
   border-radius: 4px;
   background: var(--hover-color);
@@ -148,6 +149,14 @@ main {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  max-width: 80vw;
+  min-width: 60vw;
+}
+
+.habbits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .habbit__day {
@@ -164,7 +173,7 @@ main {
 .habbit__comment {
   font-size: 16px;
   line-height: 18px;
-  padding: 20px 25px;
+  padding: 19px 25px;
   color: var(--main-font-color);
 }
 

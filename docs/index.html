@@ -19,16 +19,7 @@
       <div class="panel">
         <img class="logo" src="./images/logo.svg" alt="Habbit App logo" />
         <nav class="menu">
-          <div class="menu__list">
-            <button class="menu__item menu__item_active">
-              <img src="./images/water.svg" alt="Water" />
-            </button>
-          </div>
-          <div class="menu__list">
-            <button class="menu__item">
-              <img src="./images/food.svg" alt="Food" />
-            </button>
-          </div>
+          <div class="menu__list"></div>
           <button class="menu__add">
             <img src="./images/add.svg" alt="Add" />
           </button>
@@ -40,7 +31,7 @@
           <div class="progress">
             <div class="progress__text">
               <div class="progress__name">Progress</div>
-              <div class="progress__percent">80%</div>
+              <div class="progress__percent">0%</div>
             </div>
             <div class="progress__bar">
               <div class="progress__cover-bar"></div>
@@ -48,7 +39,7 @@
           </div>
         </header>
         <main>
-          <div>
+          <div class="habbits">
             <div class="habbit">
               <div class="habbit__day">Day 1</div>
               <div class="habbit__comment">It was so easy</div>
@@ -64,7 +55,11 @@
                   type="text"
                   placeholder="Add new comment..."
                 />
-                <img class="input__icon" src="./images/comment.svg" alt="Comment icon" />
+                <img
+                  class="input__icon"
+                  src="./images/comment.svg"
+                  alt="Comment icon"
+                />
                 <button class="form__button">Save</button>
               </form>
             </div>
