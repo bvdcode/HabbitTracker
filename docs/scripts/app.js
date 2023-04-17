@@ -31,24 +31,21 @@ function saveData() {
 }
 
 function deleteDay(e, habbit, day) {
+  let counter = 0;
   for (const existDay of habbit.days) {
     if (day === existDay) {
-      habbit.days.pop(existDay);
+      habbit.days.splice(counter, 1);
       saveData();
       renderBody(habbit);
       renderHead(habbit);
       return;
     }
+    counter++;
   }
 }
 
-function createNewDay(e, habbit, inputElementClassName) {
-  e.preventDefault();
-  const inputElement = document.querySelector('.' + inputElementClassName);
-  if (!inputElement) {
-    console.log('No input element');
-    return;
-  }
+function createNewDay(e, habbit, inputElement) {
+  e.preventDefault();  
   const text = inputElement.value;
   if (!text) {
     console.log('No text');
@@ -148,7 +145,7 @@ function createNewDayRowElement(dayNumber, habbit) {
   submitElement.classList.add('form__button');
   submitElement.innerText = 'Save';
   submitElement.addEventListener('click', (e) => {
-    createNewDay(e, habbit, 'input_icon');
+    createNewDay(e, habbit, inputElement);
   });
   formElement.appendChild(submitElement);
 
