@@ -137,6 +137,7 @@ h1 {
   height: 5px;
   border-radius: 4px;
   background: var(--hover-color);
+  transition: all 1s;
 }
 
 main {
