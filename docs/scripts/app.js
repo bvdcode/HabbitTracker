@@ -11,6 +11,7 @@ const page = {
     progressPercent: document.querySelector('.progress__percent'),
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },
+  body: document.querySelector('.habbits'),
 };
 
 /* utils */
@@ -27,6 +28,37 @@ function loadData() {
 
 function saveData() {
   localStorage.setItem(habbitKey, JSON.stringify(habbits));
+}
+
+function deleteDay(e, habbit, day) {
+  for (const existDay of habbit.days) {
+    if (day === existDay) {
+      habbit.days.pop(existDay);
+      saveData();
+      renderBody(habbit);
+      renderHead(habbit);
+      return;
+    }
+  }
+}
+
+function createNewDay(e, habbit, inputElementClassName) {
+  e.preventDefault();
+  const inputElement = document.querySelector('.' + inputElementClassName);
+  if (!inputElement) {
+    console.log('No input element');
+    return;
+  }
+  const text = inputElement.value;
+  if (!text) {
+    console.log('No text');
+    return;
+  }
+  habbit.days.push({ comment: text });
+  saveData();
+  inputElement.value = '';
+  renderBody(habbit);
+  renderHead(habbit);
 }
 
 /* render */
@@ -63,10 +95,88 @@ function renderHead(activeHabbit) {
     return;
   }
   page.header.h1.innerText = activeHabbit.name;
-  const progress = activeHabbit.days.length / activeHabbit.target > 1
-  ? 100 : activeHabbit.days.length * 100 / activeHabbit.target;
+  const progress =
+    activeHabbit.days.length / activeHabbit.target > 1
+      ? 100
+      : (activeHabbit.days.length * 100) / activeHabbit.target;
   page.header.progressPercent.innerText = progress.toFixed(0) + '%';
-  page.header.progressCoverBar.setAttribute('style', `width: ${progress.toFixed(2)}%`)
+  page.header.progressCoverBar.setAttribute(
+    'style',
+    `width: ${progress.toFixed(2)}%`
+  );
+}
+
+function renderBody(activeHabbit) {
+  if (!activeHabbit) {
+    return;
+  }
+  page.body.innerHTML = '';
+  let counter = 1;
+  for (const day of activeHabbit.days) {
+    const element = createRowElement(activeHabbit, day, counter);
+    page.body.appendChild(element);
+    counter++;
+  }
+  const addNewDayElement = createNewDayRowElement(counter, activeHabbit);
+  page.body.appendChild(addNewDayElement);
+}
+
+function createNewDayRowElement(dayNumber, habbit) {
+  const element = document.createElement('div');
+  element.classList.add('habbit');
+  const dayElement = document.createElement('div');
+  dayElement.classList.add('habbit__day');
+  dayElement.innerText = 'Day ' + dayNumber;
+  element.appendChild(dayElement);
+  const formElement = document.createElement('form');
+  formElement.classList.add('habbit__form');
+  element.appendChild(formElement);
+
+  const inputElement = document.createElement('input');
+  inputElement.classList.add('input_icon');
+  inputElement.setAttribute('type', 'text');
+  inputElement.setAttribute('placeholder', 'Add new comment...');
+  formElement.appendChild(inputElement);
+
+  const iconElement = document.createElement('img');
+  iconElement.classList.add('input__icon');
+  iconElement.setAttribute('src', './images/comment.svg');
+  iconElement.setAttribute('alt', 'Comment icon');
+  formElement.appendChild(iconElement);
+
+  const submitElement = document.createElement('button');
+  submitElement.classList.add('form__button');
+  submitElement.innerText = 'Save';
+  submitElement.addEventListener('click', (e) => {
+    createNewDay(e, habbit, 'input_icon');
+  });
+  formElement.appendChild(submitElement);
+
+  return element;
+}
+
+function createRowElement(habbit, day, dayNumber) {
+  const element = document.createElement('div');
+  element.classList.add('habbit');
+  const dayElement = document.createElement('div');
+  dayElement.classList.add('habbit__day');
+  dayElement.innerText = 'Day ' + dayNumber;
+  element.appendChild(dayElement);
+  const commentElement = document.createElement('div');
+  commentElement.classList.add('habbit__comment');
+  commentElement.innerText = day.comment;
+  element.appendChild(commentElement);
+  const deleteElement = document.createElement('div');
+  deleteElement.classList.add('habbit__delete');
+  const deleteIconElement = document.createElement('img');
+  deleteIconElement.setAttribute('src', './images/delete.svg');
+  deleteIconElement.setAttribute('alt', 'Delete day');
+  deleteIconElement.addEventListener('click', (e) => {
+    deleteDay(e, habbit, day);
+  });
+  deleteElement.appendChild(deleteIconElement);
+  element.appendChild(deleteElement);
+  return element;
 }
 
 function render(activeHabbitId) {
@@ -76,6 +186,7 @@ function render(activeHabbitId) {
   }
   renderMenu(activeHabbit);
   renderHead(activeHabbit);
+  renderBody(activeHabbit);
 }
 
 /* init */
