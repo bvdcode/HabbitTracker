@@ -20,14 +20,14 @@
         <img class="logo" src="./images/logo.svg" alt="Habbit App logo" />
         <nav class="menu">
           <div class="menu__list"></div>
-          <button class="menu__add">
+          <button class="menu__add" onclick="togglePopup()">
             <img src="./images/add.svg" alt="Add" />
           </button>
         </nav>
       </div>
       <div class="content">
         <header>
-          <h1 class='h1'>Habbits</h1>
+          <h1 class="h1">Habbits</h1>
           <div class="progress">
             <div class="progress__text">
               <div class="progress__name">Progress</div>
@@ -39,8 +39,33 @@
           </div>
         </header>
         <main>
-          <div class="habbits">
+          <div class="habbits"></div>
         </main>
+      </div>
+      <div class="cover cover_hidden" id="add-habbit-popup">
+        <div class="popup">
+          <h2>New habbit</h2>
+          <div class="icon-label">Icon</div>
+          <div class="icon-select">
+            <button class="icon icon-active">
+              <img src="./images/sport.svg" alt="Sport icon" />
+            </button>
+            <button class="icon">
+              <img src="./images/water.svg" alt="Water icon" />
+            </button>
+            <button class="icon">
+              <img src="./images/food.svg" alt="Food icon" />
+            </button>
+          </div>
+          <form class="popup__form">
+            <input type="text" name="name" placeholder="Name" />
+            <input type="number" name="target" placeholder="Target days" />
+            <button class="form__button" type="submit">Save</button>
+          </form>
+          <button class="popup__close" onclick="togglePopup()">
+            <img src="./images/close.svg" alt="Close icon" />
+          </button>
+        </div>
       </div>
     </div>
     <script src="./scripts/app.js"></script>

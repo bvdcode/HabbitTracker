@@ -12,6 +12,7 @@ const page = {
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },
   body: document.querySelector('.habbits'),
+  popup: document.getElementById('add-habbit-popup')
 };
 
 /* utils */
@@ -184,6 +185,14 @@ function render(activeHabbitId) {
   renderMenu(activeHabbit);
   renderHead(activeHabbit);
   renderBody(activeHabbit);
+}
+
+function togglePopup() {
+  if (page.popup.classList.contains('cover_hidden')) {
+    page.popup.classList.remove('cover_hidden');
+  } else {    
+    page.popup.classList.add('cover_hidden');
+  }
 }
 
 /* init */
