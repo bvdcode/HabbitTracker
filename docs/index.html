@@ -47,17 +47,18 @@
           <h2>New habbit</h2>
           <div class="icon-label">Icon</div>
           <div class="icon-select">
-            <button class="icon icon-active">
+            <button class="icon icon_active" onclick="setIcon(this, 'sport')">
               <img src="./images/sport.svg" alt="Sport icon" />
             </button>
-            <button class="icon">
+            <button class="icon" onclick="setIcon(this, 'water')">
               <img src="./images/water.svg" alt="Water icon" />
             </button>
-            <button class="icon">
+            <button class="icon" onclick="setIcon(this, 'food')">
               <img src="./images/food.svg" alt="Food icon" />
             </button>
           </div>
           <form class="popup__form">
+            <input type="text" name="icon" hidden value="sport" />
             <input type="text" name="name" placeholder="Name" />
             <input type="number" name="target" placeholder="Target days" />
             <button class="form__button" type="submit">Save</button>

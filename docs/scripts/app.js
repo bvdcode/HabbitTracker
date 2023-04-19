@@ -12,7 +12,8 @@ const page = {
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },
   body: document.querySelector('.habbits'),
-  popup: document.getElementById('add-habbit-popup')
+  popup: document.getElementById('add-habbit-popup'),
+  popupIconField: document.querySelector('.popup__form input[name="icon"]'),
 };
 
 /* utils */
@@ -46,7 +47,7 @@ function deleteDay(e, habbit, day) {
 }
 
 function createNewDay(e, habbit, inputElement) {
-  e.preventDefault();  
+  e.preventDefault();
   const text = inputElement.value;
   if (!text) {
     console.log('No text');
@@ -190,9 +191,16 @@ function render(activeHabbitId) {
 function togglePopup() {
   if (page.popup.classList.contains('cover_hidden')) {
     page.popup.classList.remove('cover_hidden');
-  } else {    
+  } else {
     page.popup.classList.add('cover_hidden');
   }
+}
+
+function setIcon(context, icon) {
+  page.popupIconField.value = icon;
+  const activeIcon = document.querySelector('.icon.icon_active');
+  activeIcon.classList.remove('icon_active');
+  context.classList.add('icon_active');
 }
 
 /* init */
