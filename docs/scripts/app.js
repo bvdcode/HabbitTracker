@@ -88,8 +88,13 @@ function createHabbit(event) {
   }
   const id =
     habbits.length > 0
-      ? 1 + habbits.reduce((acc, habbit) => (acc > habbit.id ? acc : habbit.id))
+      ? 1 +
+        habbits.reduce((acc, habbit) => (acc > habbit.id ? acc : habbit.id), 0)
       : 1;
+  if (!Number.isInteger(id)) {
+    console.log('Max id is not a number: ' + id);
+    return;
+  }
   const newHabbit = {
     days: [],
     name,
