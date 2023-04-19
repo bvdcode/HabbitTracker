@@ -229,6 +229,7 @@ function render(activeHabbitId) {
   if (!activeHabbit) {
     return;
   }
+  document.location.replace(document.location.pathname + '#' + activeHabbitId);
   renderMenu(activeHabbit);
   renderHead(activeHabbit);
   renderBody(activeHabbit);
@@ -254,7 +255,14 @@ function setIcon(context, icon) {
 /* init */
 (() => {
   loadData();
-  if (habbits) {
+  if (habbits.length == 0) {
+    return;
+  }
+  const hashId = Number(document.location.hash.replace('#', ''));
+  const urlHabbit = habbits.find((h) => h.id == hashId);
+  if (urlHabbit) {
+    render(urlHabbit.id);
+  } else {
     render(habbits[0].id);
   }
 })();
