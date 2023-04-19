@@ -105,7 +105,6 @@ function createHabbit(event) {
   habbits.push(newHabbit);
   saveData();
   form['name'].value = '';
-  form['icon'].value = '';
   form['target'].value = 0;
   togglePopup();
   render(newHabbit.id);
