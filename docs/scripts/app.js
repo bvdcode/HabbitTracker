@@ -12,8 +12,11 @@ const page = {
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },
   body: document.querySelector('.habbits'),
-  popup: document.getElementById('add-habbit-popup'),
-  popupIconField: document.querySelector('.popup__form input[name="icon"]'),
+  popup: {
+    form: document.querySelector('.popup__form'),
+    window: document.getElementById('add-habbit-popup'),
+    iconField: document.querySelector('.popup__form input[name="icon"]'),
+  },
 };
 
 /* utils */
@@ -53,11 +56,54 @@ function createNewDay(e, habbit, inputElement) {
     console.log('No text');
     return;
   }
+  if (text.toLowerCase() == 'delete habbit') {
+    let counter = 0;
+    for (const h of habbits) {
+      if (h.id === habbit.id) {
+        habbits.splice(counter, 1);
+        saveData();
+        window.location.reload();
+        return;
+      }
+      counter++;
+    }
+    return;
+  }
   habbit.days.push({ comment: text });
   saveData();
   inputElement.value = '';
   renderBody(habbit);
   renderHead(habbit);
+}
+
+function createHabbit(event) {
+  event.preventDefault();
+  const form = page.popup.form;
+  const data = new FormData(form);
+  const name = data.get('name');
+  const icon = data.get('icon');
+  const target = data.get('target');
+  if (!name || !icon || target < 1) {
+    return;
+  }
+  const id =
+    habbits.length > 0
+      ? 1 + habbits.reduce((acc, habbit) => (acc > habbit.id ? acc : habbit.id))
+      : 1;
+  const newHabbit = {
+    days: [],
+    name,
+    icon,
+    target,
+    id,
+  };
+  habbits.push(newHabbit);
+  saveData();
+  form['name'].value = '';
+  form['icon'].value = '';
+  form['target'].value = 0;
+  togglePopup();
+  render(newHabbit.id);
 }
 
 /* render */
@@ -74,7 +120,7 @@ function renderMenu(activeHabbit) {
       element.addEventListener('click', () => {
         render(habbit.id);
       });
-      element.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="{Habbit.name}" />`;
+      element.innerHTML = `<img src="./images/${habbit.icon}.svg" alt="${habbit.name}" />`;
       if (activeHabbit.id === habbit.id) {
         element.classList.add('menu__item_active');
       }
@@ -189,17 +235,19 @@ function render(activeHabbitId) {
 }
 
 function togglePopup() {
-  if (page.popup.classList.contains('cover_hidden')) {
-    page.popup.classList.remove('cover_hidden');
+  if (page.popup.window.classList.contains('cover_hidden')) {
+    page.popup.window.classList.remove('cover_hidden');
   } else {
-    page.popup.classList.add('cover_hidden');
+    page.popup.window.classList.add('cover_hidden');
   }
 }
 
 function setIcon(context, icon) {
-  page.popupIconField.value = icon;
+  page.popup.iconField.value = icon;
   const activeIcon = document.querySelector('.icon.icon_active');
-  activeIcon.classList.remove('icon_active');
+  if (activeIcon) {
+    activeIcon.classList.remove('icon_active');
+  }
   context.classList.add('icon_active');
 }
 
